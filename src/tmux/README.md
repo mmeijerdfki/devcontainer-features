@@ -7,7 +7,7 @@ A feature to install Tmux building from source
 
 ```json
 "features": {
-    "ghcr.io/duduribeiro/devcontainer-features/tmux:1": {}
+    "ghcr.io/mmeijerdfki/devcontainer-features/tmux:1": {}
 }
 ```
 
@@ -25,4 +25,4 @@ This Feature should work on recent versions of Debian/Ubuntu with the `apt` pack
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/duduribeiro/devcontainer-features/blob/main/src/tmux/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/mmeijerdfki/devcontainer-features/blob/main/src/tmux/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
