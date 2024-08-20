@@ -8,7 +8,7 @@ Build Neovim from source and installs
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/duduribeiro/devcontainer-features/neovim:1": {
+        "ghcr.io/mmeijerdfki/devcontainer-features/neovim:1": {
             "version": "stable"
         }
     }
@@ -23,7 +23,7 @@ Build Tmux from source and installs
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/duduribeiro/devcontainer-features/tmux:1": {
+        "ghcr.io/mmeijerdfki/devcontainer-features/tmux:1": {
             "version": "latest"
         }
     }
