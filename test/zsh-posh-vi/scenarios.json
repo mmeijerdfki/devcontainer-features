@@ -1,0 +1,8 @@
+{
+    "install_zsh_bookworm": {
+        "image": "mcr.microsoft.com/devcontainers/base:1-bookworm",
+        "features": {
+            "zsh-posh-vi": {}
+        }
+    }
+}

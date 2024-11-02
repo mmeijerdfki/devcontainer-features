@@ -74,8 +74,3 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
-
-# load oh my posh prompt if config is present and the command is available
-if [ -f "$HOME/.config/zsh/ohmyposh/zen.toml" ] && command -v oh-my-posh 2>&1 > /dev/null; then
-  eval "$(oh-my-posh init zsh --config $HOME/.config/zsh/ohmyposh/zen.toml)"
-fi
