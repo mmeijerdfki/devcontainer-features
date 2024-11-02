@@ -1,0 +1,34 @@
+{
+    "id": "zsh-posh-vi",
+    "version": "0.0.1",
+    "name": "Zsh Posh Vi",
+    "dependsOn": {
+      "ghcr.io/mmeijerdfki/devcontainer-features/common-base": {}
+    },
+    "description": "Installs zsh in vi mode with or without oh-my-posh as the prompt",
+    "options": {
+        "configureZshAsDefaultShell": {
+            "type": "boolean",
+            "default": false,
+            "description": "Should zsh be the default?"
+        },
+        "configureOhMyPosh": {
+            "type": "boolean",
+            "default": true,
+            "description": "When using zsh, configure oh my posh as the prompt?"
+        },
+        "poshInstallShCommitHash": {
+            "type": "string",
+            "default": "5937cf8e3b76b58a9df890869a1c83f1538e448d",
+            "description": "From which commit should the oh my posh install.sh get retrieved"
+        },
+        "poshVersion": {
+            "type": "string",
+            "default": "latest",
+            "description": "Tag oh my posh to specific version"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/mmeijerdfki/devcontainer-features/common-base"
+    ]
+}

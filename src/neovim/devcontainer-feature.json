@@ -1,10 +1,9 @@
 {
     "name": "Neovim (from source)",
     "id": "neovim",
-    "version": "1.0.1",
+    "version": "0.0.1",
     "dependsOn": {
-      "ghcr.io/devcontainers/features/common-utils": {},
-      "ghcr.io/devcontainers/features/git": {}
+      "ghcr.io/mmeijerdfki/devcontainer-features/common-base": {}
     },
     "description": "A feature to install Neovim building from source",
     "options": {
@@ -25,7 +24,6 @@
         }
     },
     "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils",
-        "ghcr.io/devcontainers/features/git"
+        "ghcr.io/mmeijerdfki/devcontainer-features/common-base"
     ]
 }

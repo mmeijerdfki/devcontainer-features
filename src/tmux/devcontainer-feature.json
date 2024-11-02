@@ -1,9 +1,9 @@
 {
     "name": "Tmux (from source)",
     "id": "tmux",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "dependsOn": {
-      "ghcr.io/devcontainers/features/common-utils": {},
+      "ghcr.io/mmeijerdfki/devcontainer-features/common-base": {}
     },
     "description": "A feature to install Tmux building from source",
     "options": {
@@ -20,6 +20,6 @@
         }
     },
     "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils"
+        "ghcr.io/mmeijerdfki/devcontainer-features/common-base"
     ]
 }
