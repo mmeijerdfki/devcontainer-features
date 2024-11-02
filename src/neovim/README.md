@@ -7,7 +7,7 @@ A feature to install Neovim building from source
 
 ```json
 "features": {
-    "ghcr.io/mmeijerdfki/devcontainer-features/neovim:1": {}
+    "ghcr.io/mmeijerdfki/devcontainer-features/neovim:0": {}
 }
 ```
 

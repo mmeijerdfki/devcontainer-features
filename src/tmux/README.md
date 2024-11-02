@@ -7,7 +7,7 @@ A feature to install Tmux building from source
 
 ```json
 "features": {
-    "ghcr.io/mmeijerdfki/devcontainer-features/tmux:1": {}
+    "ghcr.io/mmeijerdfki/devcontainer-features/tmux:0": {}
 }
 ```
 
