@@ -14,10 +14,13 @@ jobs:
       matrix:
         features:
           - neovim
+          - tmux
+          - zsh-posh-vi
+
         baseImage:
-          - debian:latest
           - ubuntu:latest
-          - mcr.microsoft.com/devcontainers/base:ubuntu
+          - debian:latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -34,6 +37,9 @@ jobs:
       matrix:
         features:
           - neovim
+          - tmux
+          - zsh-posh-vi
+
     steps:
       - uses: actions/checkout@v3
 
