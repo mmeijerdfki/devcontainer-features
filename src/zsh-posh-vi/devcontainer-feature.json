@@ -24,8 +24,8 @@
         },
         "poshVersion": {
             "type": "string",
-            "default": "latest",
-            "description": "Tag oh my posh to specific version"
+            "default": "",
+            "description": "Tag oh my posh to specific version. Leaving this empty defaults to latest"
         }
     },
     "installsAfter": [

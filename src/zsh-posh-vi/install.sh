@@ -5,7 +5,7 @@ set -e
 CONFIGURE_ZSH_AS_DEFAULT_SHELL="${CONFIGUREZSHASDEFAULTSHELL:-"false"}"
 CONFIGURE_OH_MY_POSH="${CONFIGUREOHMYPOSH:-"true"}"
 POSH_INSTALLSH_COMMIT_HASH="${POSHINSTALLSHCOMMITHASH:-"5937cf8e3b76b58a9df890869a1c83f1538e448d"}"
-POSH_VERSION="${POSHVERSION:-"latest"}"
+POSH_VERSION="${POSHVERSION:-""}"
 
 MARKER_FILE="/usr/local/etc/dev-containers/zsh-posh-vi"
 TMP_DIR=$(mktemp -d)
@@ -17,6 +17,7 @@ install_debian_zsh() {
     # Ensure apt is in non-interactive to avoid prompts
     export DEBIAN_FRONTEND=noninteractive
 
+    apt-get update -y
     apt-get install -y zsh
 
     # Clean up
@@ -213,7 +214,7 @@ fi
 ## rebuild to use oh my posh
 if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" != "true" ]; then
     # fetch the installation script from github
-    posh_download_url="https://github.com/JanDeDobbeleer/oh-my-posh/blob/${POSH_INSTALLSH_COMMIT_HASH}/website/static/install.sh"
+    posh_download_url="https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/${POSH_INSTALLSH_COMMIT_HASH}/website/static/install.sh"
     posh_install_script="${TMP_DIR}/install.sh"
 
     posh_install_dir="${user_home}/.local/bin"
@@ -244,7 +245,7 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
 
     HOME="$TMP_HOME"
 
-    if [ ! -f "${posh_install_script}/oh-my-posh" ]; then
+    if [ ! -f "${posh_install_dir}/oh-my-posh" ]; then
         printf "Something went wrong while installing oh-my-posh. Retry or report to the maintainer of the zsh-posh-vi feature repo!"
         exit 1
     fi
@@ -265,6 +266,8 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
         mkdir -p "${copy_to_user_files[@]}"
         cp -rf "${copy_to_user_files[@]}" /root
     fi
+    echo 'export PATH=$HOME/.local/bin:${PATH:+:${PATH}}' >> "${user_home}/.profile"
+
     OHMYPOSH_ALREADY_CONFIGURED="true"
 fi
 
