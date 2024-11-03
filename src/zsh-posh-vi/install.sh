@@ -196,11 +196,14 @@ if [ ! -f "${user_home}/.zprofile" ] && [ "${ZSH_BASE_ALREADY_CONFIGURED}" != "t
         # prepend /root/ on those elements
         root_files=("${root_files[@]/#//root/}")
 
+        # remove the last part to make sure files are correctly copied
+        root_files=("$(dirname ${root_files[@]})")
+
         for (( i=0; i<${#root_files[*]}; ++i)); do
             if [ ! -f "${user_files[$i]}" ]; then
                 mkdir -p "${root_files[$i]}"
             fi
-            cp -rf "${user_files[$i]}/*" "${root_files[$i]}"
+            cp -rf "${user_files[$i]}" "${root_files[$i]}"
         done
         chown -R root:root "${root_files[@]}"
 
