@@ -125,13 +125,12 @@ if [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
     esac
 fi
 
-
 # assume that atleast the root user is present
 USERNAME="$(getent passwd \
-            {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}\
+            $(seq $(awk '/^UID_MIN/ {print $2}' /etc/login.defs) $(awk '/^UID_MAX/ {print $2}' /etc/login.defs))\
             | head -n1 | awk -F ':' '{print $1}')"
 
-if [ -z $USERNAME ]; then
+if [ -z "$USERNAME" ]; then
     USERNAME="root"
 fi
 group_name="$(id -gn $USERNAME)"
@@ -260,7 +259,7 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
         echo "$eval_string" >> "${user_home}/.config/zsh/.zshrc"
     fi
 
-    # Copy to root user if atleast one none-root user is present
+    # Copy to root user if atleast one non-root user is present
     if [ "${USERNAME}" != "root" ]; then
         copy_to_user_files=("${posh_install_dir}" "${posh_themes_dir}")
         mkdir -p "${copy_to_user_files[@]}"
