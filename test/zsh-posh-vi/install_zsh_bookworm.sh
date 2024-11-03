@@ -6,7 +6,8 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "version" zsh -V
+check "version-zsh" zsh --version
+check "version-posh" oh-my-posh --version
 
 # Report results
 reportResults
