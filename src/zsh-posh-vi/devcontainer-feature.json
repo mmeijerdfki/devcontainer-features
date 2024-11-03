@@ -1,6 +1,6 @@
 {
     "id": "zsh-posh-vi",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "name": "Zsh Posh Vi",
     "dependsOn": {
       "ghcr.io/mmeijerdfki/devcontainer-features/common-base": {}
