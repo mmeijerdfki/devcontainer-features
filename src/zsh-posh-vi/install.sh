@@ -294,7 +294,7 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
             else
                 mkdir -p "$(dirname ${root_files[$i]})"
             fi
-            cp -rf "${user_files[$i]}/*" "${root_files[$i]}"
+            cp -rf "${user_files[$i]}" "${root_files[$i]}"
         done
         chown -R root:root "${root_files[@]}"
     fi
