@@ -171,7 +171,7 @@ if [ ! -f "${user_home}/.zprofile" ] && [ "${ZSH_BASE_ALREADY_CONFIGURED}" != "t
 
     zsh_config_dir="${user_home}/.config/zsh"
     if [ ! -d "${zsh_config_dir}" ]; then
-        install -d -o "${USERNAME}" -g "${group_name}" -m 0644 "$zsh_config_dir"
+        install -d -o "${USERNAME}" -g "${group_name}" -m 0755 "$zsh_config_dir"
     fi
 
     # copy over default config
@@ -179,7 +179,7 @@ if [ ! -f "${user_home}/.zprofile" ] && [ "${ZSH_BASE_ALREADY_CONFIGURED}" != "t
     chown ${USERNAME}:${group_name} "${zsh_config_dir}/.zshrc"
 
     # set some default options for xdg directories
-    printf '\n# XDG_PATHS and config directories' >> "${user_home}/.profile"
+    printf '\n# XDG_PATHS and config directories\n' >> "${user_home}/.profile"
     echo 'export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"' >> "${user_home}/.profile"
     echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> "${user_home}/.profile"
     echo 'export XDG_DATA_HOME="$HOME/.local/share"' >> "${user_home}/.profile"
@@ -241,11 +241,11 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
 
     # make sure the install folder is set up
     if [ ! -d "${posh_install_dir}" ]; then
-        install -d -o "${USERNAME}" -g "${group_name}" -m 0644 "$posh_install_dir"
+        install -d -o "${USERNAME}" -g "${group_name}" -m 0755 "$posh_install_dir"
     fi
 
     if [ ! -d "$posh_themes_dir" ]; then
-        install -d -o "${USERNAME}" -g "${group_name}" -m 0644 "$posh_themes_dir"
+        install -d -o "${USERNAME}" -g "${group_name}" -m 0755 "$posh_themes_dir"
     fi
 
     # install oh-my-posh using the provided install script
