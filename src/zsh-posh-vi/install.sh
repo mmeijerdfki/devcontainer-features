@@ -200,7 +200,7 @@ if [ ! -f "${user_home}/.zprofile" ] && [ "${ZSH_BASE_ALREADY_CONFIGURED}" != "t
             if [ ! -f "${user_files[$i]}" ]; then
                 mkdir -p "${root_files[$i]}"
             fi
-            cp -rf "${user_files[$i]}" "${root_files[$i]}"
+            cp -rf "${user_files[$i]}/*" "${root_files[$i]}"
         done
         chown -R root:root "${root_files[@]}"
 
@@ -283,12 +283,12 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
         root_files=("${root_files[@]/#//root/}")
 
         for (( i=0; i<${#root_files[*]}; ++i)); do
-            if [ ! -f "${user_files[$i]}" ]; then
+            if [ -d "${user_files[$i]}" ]; then
                 mkdir -p "${root_files[$i]}"
             else
                 mkdir -p "$(dirname ${root_files[$i]})"
             fi
-            cp -rf "${user_files[$i]}" "${root_files[$i]}"
+            cp -rf "${user_files[$i]}/*" "${root_files[$i]}"
         done
         chown -R root:root "${root_files[@]}"
     fi
