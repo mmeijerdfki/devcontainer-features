@@ -167,12 +167,11 @@ done
 if [ ! -f "${user_home}/.zprofile" ] && [ "${ZSH_BASE_ALREADY_CONFIGURED}" != "true" ] ; then
     touch "${user_home}/.profile"
     ln -s "${user_home}/.profile" "${user_home}/.zprofile"
-    chown ${USERNAME}:${group_name} "${user_home}/.zprofile"
+    chown ${USERNAME}:${group_name} "${user_home}/.zprofile" "${user_home}/.profile"
 
     zsh_config_dir="${user_home}/.config/zsh"
     if [ ! -d "${zsh_config_dir}" ]; then
-        mkdir -p "${zsh_config_dir}"
-        chown ${USERNAME}:${group_name} "$zsh_config_dir"
+        install -d -o "${USERNAME}" -g "${group_name}" -m 0644 "$zsh_config_dir"
     fi
 
     # copy over default config
@@ -187,11 +186,25 @@ if [ ! -f "${user_home}/.zprofile" ] && [ "${ZSH_BASE_ALREADY_CONFIGURED}" != "t
     echo 'export XDG_CACHE_HOME="$HOME/.cache"' >> "${user_home}/.profile"
     echo 'export XDG_STATE_HOME="$HOME/.local/share"' >> "${user_home}/.profile"
 
-    # Copy to non-root user if one is specified
+    # Copy to root user if atleast one non-root user is present
     if [ "${USERNAME}" != "root" ]; then
-        copy_to_user_files=("${posh_install_dir}" "${posh_themes_dir}")
-        cp -rf "${copy_to_user_files[@]}" /root
-        chown -R ${USERNAME}:${group_name} "${copy_to_user_files[@]}"
+        user_files=("$zsh_config_dir" "${user_home}/.profile")
+
+        # remove the first two components of the path
+        root_files=("${user_files[@]#/*/*/}")
+
+        # prepend /root/ on those elements
+        root_files=("${root_files[@]/#//root/}")
+
+        for (( i=0; i<${#root_files[*]}; ++i)); do
+            if [ ! -f "${user_files[$i]}" ]; then
+                mkdir -p "${root_files[$i]}"
+            fi
+            cp -rf "${user_files[$i]}" "${root_files[$i]}"
+        done
+        chown -R root:root "${root_files[@]}"
+
+        ln -s "/root/.profile" "/root/.zprofile"
     fi
 
     if [ "${CONFIGURE_ZSH_AS_DEFAULT_SHELL}" == "true" ]; then
@@ -228,13 +241,11 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
 
     # make sure the install folder is set up
     if [ ! -d "${posh_install_dir}" ]; then
-        mkdir -p "$posh_install_dir"
-        chown ${USERNAME}:${group_name} "$posh_install_dir"
+        install -d -o "${USERNAME}" -g "${group_name}" -m 0644 "$posh_install_dir"
     fi
 
     if [ ! -d "$posh_themes_dir" ]; then
-        mkdir -p "$posh_themes_dir"
-        chown ${USERNAME}:${group_name} "$posh_themes_dir"
+        install -d -o "${USERNAME}" -g "${group_name}" -m 0644 "$posh_themes_dir"
     fi
 
     # install oh-my-posh using the provided install script
@@ -259,14 +270,28 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
         echo "$eval_string" >> "${user_home}/.config/zsh/.zshrc"
     fi
 
-    # Copy to root user if atleast one non-root user is present
-    if [ "${USERNAME}" != "root" ]; then
-        copy_to_user_files=("${posh_install_dir}" "${posh_themes_dir}")
-        mkdir -p "${copy_to_user_files[@]}"
-        cp -rf "${copy_to_user_files[@]}" /root
-    fi
     echo 'export PATH=$HOME/.local/bin:${PATH:+:${PATH}}' >> "${user_home}/.profile"
 
+    # Copy to root user if atleast one non-root user is present
+    if [ "${USERNAME}" != "root" ]; then
+        user_files=("${posh_install_dir}" "${posh_themes_dir}")
+
+        # remove the first two components of the path
+        root_files=("${user_files[@]#/*/*/}")
+
+        # prepend /root/ on those elements
+        root_files=("${root_files[@]/#//root/}")
+
+        for (( i=0; i<${#root_files[*]}; ++i)); do
+            if [ ! -f "${user_files[$i]}" ]; then
+                mkdir -p "${root_files[$i]}"
+            else
+                mkdir -p "$(dirname ${root_files[$i]})"
+            fi
+            cp -rf "${user_files[$i]}" "${root_files[$i]}"
+        done
+        chown -R root:root "${root_files[@]}"
+    fi
     OHMYPOSH_ALREADY_CONFIGURED="true"
 fi
 
