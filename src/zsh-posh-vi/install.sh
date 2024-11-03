@@ -285,6 +285,9 @@ if [ "${CONFIGURE_OH_MY_POSH}" == "true" ] && [ "$OHMYPOSH_ALREADY_CONFIGURED" !
         # prepend /root/ on those elements
         root_files=("${root_files[@]/#//root/}")
 
+        # remove the last part to make sure files are correctly copied
+        root_files=("$(dirname ${root_files[@]})")
+
         for (( i=0; i<${#root_files[*]}; ++i)); do
             if [ -d "${user_files[$i]}" ]; then
                 mkdir -p "${root_files[$i]}"
