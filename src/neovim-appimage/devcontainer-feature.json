@@ -1,0 +1,31 @@
+{
+    "name": "Neovim (from appimage releases)",
+    "id": "neovim-appimage",
+    "version": "0.0.2",
+    "dependsOn": {
+      "ghcr.io/mmeijerdfki/devcontainer-features/common-base": {}
+    },
+    "description": "A feature to install Neovim from appimage",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "stable",
+                "nightly",
+                "0.10.2",
+                "0.10.1",
+                "0.10.0"
+            ],
+            "default": "stable",
+            "description": "The version of Neovim to be installed (stable, nightly or a specific version in the format 'MAJOR.MINOR.PATCH' e.g. '0.9.5)"
+        },
+        "neovimReleaseRepo": {
+            "type": "string",
+            "default": "neovim/neovim",
+            "description": "The repo to pull the release appimage from. The name has to be nvim.appimage!"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/mmeijerdfki/devcontainer-features/common-base"
+    ]
+}
