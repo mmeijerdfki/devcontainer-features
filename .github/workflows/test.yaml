@@ -14,7 +14,8 @@ jobs:
       matrix:
         features:
           - neovim
-          - neovim-appimage
+          # currently disabled, due to more sensitive permissions needed
+          # - neovim-appimage
           - tmux
           - zsh-posh-vi
 
@@ -38,7 +39,8 @@ jobs:
       matrix:
         features:
           - neovim
-          - neovim-appimage
+          # currently disabled, due to more sensitive permissions needed
+          # - neovim-appimage
           - tmux
           - zsh-posh-vi
 
