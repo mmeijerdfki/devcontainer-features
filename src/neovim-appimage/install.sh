@@ -4,7 +4,7 @@ set -e
 echo "Activating feature 'neovim-appimage'"
 
 VERSION=${VERSION:-stable}
-NEOVIM_RELEASE_REPO=${NEOVIM_RELEASE_REPO:-neovim/neovim}
+NEOVIM_RELEASE_REPO=${NEOVIMRELEASEREPO:-neovim/neovim}
 
 echo "The version to be installed is: $VERSION"
 
