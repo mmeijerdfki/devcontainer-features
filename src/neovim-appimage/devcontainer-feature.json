@@ -1,7 +1,7 @@
 {
     "name": "Neovim (from appimage releases)",
     "id": "neovim-appimage",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "dependsOn": {
       "ghcr.io/mmeijerdfki/devcontainer-features/common-base": {}
     },

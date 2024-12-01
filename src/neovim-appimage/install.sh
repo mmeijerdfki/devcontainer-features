@@ -69,4 +69,6 @@ chmod +x "$nvim_install_exe"
 echo "Installed! Setting up PATH..."
 
 echo 'export PATH=/opt/nvim${PATH:+:${PATH}}' >> "/etc/profile"
+echo 'export PATH=/opt/nvim${PATH:+:${PATH}}' >> "/etc/zsh/zprofile"
+
 echo "Finished installing nvim-appimage!"
