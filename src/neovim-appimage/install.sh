@@ -11,7 +11,7 @@ echo "The version to be installed is: $VERSION"
 # Debian / Ubuntu dependencies
 install_debian_dependencies() {
   apt-get update -y
-  apt-get -y install fuse curl
+  apt-get -y install fuse curl python3-venv
 
   apt-get -y clean
   rm -rf /var/lib/apt/lists/*

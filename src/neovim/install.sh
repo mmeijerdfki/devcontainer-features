@@ -9,7 +9,7 @@ echo "The version to be installed is: $VERSION"
 # Debian / Ubuntu dependencies
 install_debian_dependencies() {
   apt-get update -y
-  apt-get -y install ninja-build gettext cmake unzip curl build-essential
+  apt-get -y install ninja-build gettext cmake unzip curl build-essential python3-venv
 
   apt-get -y clean
   rm -rf /var/lib/apt/lists/*
